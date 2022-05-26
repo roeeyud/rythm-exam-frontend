@@ -1,14 +1,19 @@
 import React from 'react';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const borderColor = '#EAECF0';
-export const borderStyle = `1px solid ${borderColor}`;
+// TODO: figure out how to expand theme object to allow these variables
+export const separationColor = '#EAECF0';
+export const lightBackground = '#F9FAFB';
+export const lightFontColor = '#667085';
+export const borderStyle = `1px solid ${separationColor}`;
+const primaryColor = '#6941C6';
 
+// TODO: Break this file to smaller files
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#6941C6'
-        }
+            main: primaryColor,
+        },
     },
     components: {
         MuiTypography: {
@@ -42,7 +47,7 @@ const theme = createTheme({
                     fontWeight: 500,
                     fontSize: 14,
                     '&:hover': {
-                        background: '#F9FAFB',
+                        background: lightBackground,
                     },
                     '&.large-text': {
                         fontWeight: 600,
@@ -50,6 +55,14 @@ const theme = createTheme({
                     },
                     '& svg': {
                         marginRight: 10
+                    },
+                    '&.cancel-button': {
+                        boxShadow: 'none',
+                        background: '#F9F5FF',
+                        color: primaryColor,
+                        '&:hover': {
+                            background: '#F9F5FF'
+                        }
                     }
                 },
                 outlinedInherit: {
@@ -60,7 +73,7 @@ const theme = createTheme({
                     color: '#ffffff',
                     background: '#7F56D9',
                     '&:hover': {
-                        background: '#6941C6'
+                        background: primaryColor
                     }
                 }
             }
@@ -69,6 +82,47 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: 6,
+                },
+                sizeSmall: {
+                    '& .MuiSvgIcon-root': {
+                        width: 16,
+                        height: 16,
+                    }
+                }
+            }
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 8
+                }
+            }
+        },
+        MuiSelect: {
+            styleOverrides: {
+                select: {
+                    minWidth: 130,
+                    '& fieldset': {
+                        border: 'none'
+                    }
+                }
+            }
+        },
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    border: '1px solid #D0D5DD',
+                    '& fieldset': {
+                        border: 'none'
+                    },
+                    background: '#FFFFFF'
+                }
+            }
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    height: 44
                 }
             }
         },
@@ -90,6 +144,84 @@ const theme = createTheme({
                     boxShadow: 'none',
                     background: '#ffffff',
                     borderBottom: borderStyle,
+                }
+            }
+        },
+        MuiDialogTitle: {
+            styleOverrides: {
+                root: {
+                    background: lightBackground,
+                    borderBottom: borderStyle,
+                    fontWeight: 600,
+                    fontSize: 16,
+                }
+            }
+        },
+        MuiDialogContent: {
+            styleOverrides: {
+                root: {
+                    overflow: 'hidden', // Some freaky css issue I didn't want to waste too much time on
+                }
+            }
+        },
+        MuiIcon: {
+            styleOverrides: {
+                root: {
+                    height: 25,
+                    fontSize: 22
+                }
+            }
+        },
+        MuiListItem: {
+            styleOverrides: {
+                root: {
+                    margin: '10px 0px',
+                    borderRadius: 6,
+                    height: 36,
+                    fontSize: 14,
+                    color: lightFontColor,
+                    '&.Mui-selected': {
+                        color: primaryColor,
+                        '& p': {
+                            fontWeight: 600,
+                        }
+                    }
+                },
+
+            }
+        },
+        MuiBadge: {
+            styleOverrides: {
+                root: {
+                    padding: '2px 8px',
+                    background: '#EAECF0',
+                    borderRadius: 16
+                }
+            }
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 8,
+                    boxShadow: 'none',
+                }
+            }
+        },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    margin: 0,
+                    padding: 0
+                }
+            }
+        },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    color: lightFontColor,
+                    '&.dark-cell': {
+                        color: '#000000',
+                    }
                 }
             }
         }
