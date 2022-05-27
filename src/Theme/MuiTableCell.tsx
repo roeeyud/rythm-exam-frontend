@@ -3,6 +3,7 @@ import {lightFontColor} from "./constants";
 export default {
     styleOverrides: {
         root: {
+            whiteSpace: 'nowrap',
             fontSize: '1rem',
             color: lightFontColor,
             '& .MuiTypography-root.dark-cell': {

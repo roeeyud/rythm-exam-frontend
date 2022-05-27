@@ -59,7 +59,7 @@ export default function QueryBar({ setQuery, query }: QueryBarProps) {
             </Typography>
         </Stack>
     }));
-    return <RootStack direction={'row'} spacing={2}>
+    return <RootStack direction={'row'} spacing={2} minWidth={970}>
         <SearchTextField
             value={renderedQuery.search}
             placeholder={'Search'}

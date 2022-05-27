@@ -8,6 +8,7 @@ import PageHeader from "./PageHeader";
 import NavMenu from "./NavMenu";
 import QueryBar from "./QueryBar";
 import OrderTable from "./OrderTable";
+import Pagination from "./Pagination";
 import useOrders from '../hooks/useOrders';
 
 export default function PageBody() {
@@ -19,9 +20,10 @@ export default function PageBody() {
             <PageHeader onSubmitNewOrder={refreshOrders}/>
             <Stack direction={'row'} spacing={8} width={'100%'}>
                 <NavMenu />
-                <Stack direction={'column'} spacing={4} flex={1}>
+                <Stack direction={'column'} spacing={4} flex={1} overflow={'auto'} >
                     <QueryBar query={query} setQuery={setQuery} />
                     <OrderTable orders={orders} query={query}/>
+                    <Pagination query={query} setQuery={setQuery} />
                 </Stack>
             </Stack>
         </Container>

@@ -30,8 +30,8 @@ export default function OrderTable({ orders, query }: QueryBarProps) {
     if (orders instanceof Error) {
         return <div>{orders.message}</div>;
     }
-    return <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    return <TableContainer component={Paper} sx={{ minWidth: 970 }}>
+        <Table sx={{ minWidth: 970 }} aria-label="simple table">
             <TableHead>
                 <TableRow>
                     <TableCell><Checkbox /></TableCell>
@@ -68,7 +68,7 @@ export default function OrderTable({ orders, query }: QueryBarProps) {
                         <TableCell width={10}><Checkbox /></TableCell>
                         <TableCell component="th" scope="row">
                             <Typography fontWeight={600} className={'dark-cell'}>
-                                {invoiceName}
+                                {invoiceName.substring(0, invoiceName.lastIndexOf('.'))}
                             </Typography>
                         </TableCell>
                         <TableCell>{createdAtText}</TableCell>

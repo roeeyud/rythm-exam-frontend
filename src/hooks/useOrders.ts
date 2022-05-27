@@ -7,7 +7,7 @@ interface UsedQuery {
     search: string,
     limit: number,
     status?: string,
-    customerId: string,
+    customerId?: string,
     orderByCol: string,
     order: string,
     offset: number,
@@ -25,6 +25,9 @@ export default function useOrders(query: UseOrderQuery) {
         };
         if (newQuery?.status === 'all') {
             delete newQuery?.status;
+        }
+        if (newQuery?.customerId === 'all') {
+            delete newQuery?.customerId;
         }
         setUsedQuery(newQuery);
     }, [query]);

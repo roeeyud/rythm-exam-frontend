@@ -21,6 +21,7 @@ import MuiCheckbox from './MuiCheckbox';
 import MuiTableCell from './MuiTableCell';
 import MuiChip from './MuiChip';
 import MuiTableHead from './MuiTableHead';
+import MuiTableContainer from './MuiTableContainer';
 
 const theme = createTheme({
     palette: {
@@ -48,6 +49,7 @@ const theme = createTheme({
         MuiTableCell,
         MuiChip,
         MuiTableHead,
+        MuiTableContainer,
     }
 })
 
