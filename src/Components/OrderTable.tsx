@@ -14,6 +14,9 @@ import UseOrderQuery from "../definitions/UseOrderQuery";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import * as React from "react";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
 
 interface QueryBarProps {
     query: UseOrderQuery,
@@ -22,10 +25,10 @@ interface QueryBarProps {
 
 export default function OrderTable({ orders, query }: QueryBarProps) {
     if (orders === null) {
-        return <div>'loading'</div>
+        return <div>loading</div>
     }
     if (orders instanceof Error) {
-        return <div>orders.message</div>;
+        return <div>{orders.message}</div>;
     }
     return <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -37,15 +40,24 @@ export default function OrderTable({ orders, query }: QueryBarProps) {
                     <TableCell>Status</TableCell>
                     <TableCell>Customer</TableCell>
                     <TableCell>Purchase</TableCell>
+                    <TableCell></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
-                {orders.map(({ purchase, customer, status, createdAt, invoiceName, id }) => {
+                {orders.map(({ purchase, customer, status, createdAt, invoiceName, id, invoiceId }) => {
                     const purchaseText = purchaseFrequencies.find((purchaseFrequency) => purchaseFrequency.value === purchase)?.label || 'Invalid';
                     const orderStatus = orderStatuses.find((orderStatus) => orderStatus.value === status);
                     const createdAtText = new Date(createdAt).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric" })
                     const orderColor = orderStatus?.color as 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
-                    const orderIcon = orderStatus?.icon as React.ReactElement | undefined;
+                    // const OrderIcon = orderStatus?.icon as React.ReactComponentElement<any, any> | undefined;
+                    function OrderIcon() {
+                        if (!orderStatus?.icon) {
+                            return null;
+                        }
+                        const Icon = orderStatus?.icon;
+                        return <Icon />
+                    }
+
                     return <TableRow
                         key={id}
                         sx={{
@@ -54,8 +66,8 @@ export default function OrderTable({ orders, query }: QueryBarProps) {
                         }}
                     >
                         <TableCell width={10}><Checkbox /></TableCell>
-                        <TableCell className={'dark-cell'}>
-                            <Typography fontWeight={600} >
+                        <TableCell component="th" scope="row">
+                            <Typography fontWeight={600} className={'dark-cell'}>
                                 {invoiceName}
                             </Typography>
                         </TableCell>
@@ -64,11 +76,37 @@ export default function OrderTable({ orders, query }: QueryBarProps) {
                             <Chip
                                 label={orderStatus?.label || 'invalid'}
                                 color={orderColor || 'default'}
-                                icon={orderIcon}
+                                icon={OrderIcon ? <OrderIcon /> : undefined}
                             />
                         </TableCell>
-                        <TableCell>{customer.name}</TableCell>
+                        <TableCell>
+                            <Stack direction={'row'} spacing={1} alignItems={'center'}>
+                                <Avatar src={customer.avatarUrl}>{`${customer.name.split(' ')[0][0]}${customer.name.split(' ')[1][0]}`}</Avatar>
+                                <Stack direction={'column'} spacing={0}>
+                                    <Typography className={'dark-cell'}>
+                                        {customer.name}
+                                    </Typography>
+                                    <Typography>
+                                        {customer.email}
+                                    </Typography>
+                                </Stack>
+                            </Stack>
+                        </TableCell>
                         <TableCell >{purchaseText}</TableCell>
+                        <TableCell >
+                            <Stack direction={'row'} spacing={2}>
+                                <Button color={'inherit'}>
+                                    Edit
+                                </Button>
+                                <Button
+                                    component={'a'}
+                                    href={`${process.env.REACT_APP_API_URL}/invoice/${invoiceId}`}
+                                    color={'primary'}
+                                >
+                                    Download
+                                </Button>
+                            </Stack>
+                        </TableCell>
                     </TableRow>})}
             </TableBody>
         </Table>

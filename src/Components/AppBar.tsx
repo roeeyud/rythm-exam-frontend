@@ -30,7 +30,7 @@ export default function AppBar() {
                     width={'100%'}
                 >
                     <Stack direction={'row'} spacing={1}>
-                        {toolbarButtons.map((button) => <Button className={'large-text'} key={button} color={'primary'}>{button}</Button>)}
+                        {toolbarButtons.map((button) => <Button className={'large-text'} key={button} color={'inherit'}>{button}</Button>)}
                     </Stack>
                     <Stack direction={'row'} spacing={1}>
                         <IconButton>

@@ -17,7 +17,7 @@ export default function TextField({ icon: Icon, placeholder, label, value, onCha
         onChange(event.target.value);
     }
     return <Stack direction={'column'} spacing={1} ml={2} className={className}>
-        <Typography variant={'body2'} >
+        <Typography variant={'body1'} >
             {label}
         </Typography>
         <MuiTextField

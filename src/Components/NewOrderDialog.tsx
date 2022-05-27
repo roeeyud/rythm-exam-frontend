@@ -55,6 +55,7 @@ export default function NewOrderDialog({ open, onClose, onSubmit }: NewOrderDial
         const result = await fetch(`${process.env.REACT_APP_API_URL}/order`, options);
         setSubmitInProgress(false);
         onSubmit();
+        handleClose();
     }
 
     function handleClose() {

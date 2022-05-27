@@ -1,5 +1,8 @@
 import { ReactComponent as RefundedIcon } from '../icons/refundedStatus.svg';
 import { ReactComponent as SuccessIcon } from '../icons/successStatus.svg';
+import { ReactComponent as PendingIcon } from '../icons/pendingStatus.svg';
+import { ReactComponent as CancelledIcon } from '../icons/cancelledStatus.svg';
+import React from "react";
 
 // TODO: Consider using i18 or other translation framework
 export default [
@@ -7,7 +10,7 @@ export default [
         value: 'pending',
         label: 'Pending',
         color: 'warning',
-        icon: SuccessIcon
+        icon: PendingIcon   // Can't export the pending icon from figma
     },
     {
         value: 'paid',
@@ -22,9 +25,9 @@ export default [
         icon: RefundedIcon,
     },
     {
-        value: 'canceled',
-        label: 'Canceled',
+        value: 'cancelled',
+        label: 'Cancelled',
         color: 'error',
-        icon: SuccessIcon
+        icon: CancelledIcon
     }
-]
+] as const;

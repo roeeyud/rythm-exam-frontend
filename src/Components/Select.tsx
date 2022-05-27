@@ -1,3 +1,4 @@
+import React from 'react';
 import MuiSelect, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
@@ -7,7 +8,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 interface SelectProps {
     value: null | string,
     onChange: (newValue: null | string) => void,
-    options: Array<{ value: string, label: string }>,
+    options: Array<{ value: string, label: string | React.ReactNode }>,
     label: string,
 }
 
@@ -16,7 +17,7 @@ export default function Select({ value, options, onChange, label }: SelectProps)
         onChange(event.target.value);
     }
     return <Stack direction={'column'} spacing={1} ml={2}>
-        <Typography variant={'body2'} >
+        <Typography variant={'body1'} >
             {label}
         </Typography>
         <MuiSelect

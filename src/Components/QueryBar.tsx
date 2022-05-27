@@ -1,14 +1,16 @@
 import UseOrderQuery from "../definitions/UseOrderQuery";
 import {styled} from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import SearchIcon from '@mui/icons-material/Search';
+import {useState, useEffect} from "react";
 
 import orderStatuses from '../definitions/orderStatuses';
-import { lightBackground } from '../Theme';
+import { lightBackground } from '../Theme/constants';
 import TextField from "./TextField";
 import Select from "./Select";
 import CustomerSelect from "./CustomerSelect";
-
+import Badge from "@mui/material/Badge";
 interface QueryBarProps {
     query: UseOrderQuery,
     setQuery: (query: UseOrderQuery) => void
@@ -25,25 +27,55 @@ const SearchTextField = styled(TextField)({
     flex: 1,
 })
 
+const queryDebounceTimeout = 500;
 
 export default function QueryBar({ setQuery, query }: QueryBarProps) {
+    const [renderedQuery, setRenderedQuery] = useState<UseOrderQuery>(query);
+    useEffect(() => {
+        setRenderedQuery(query);
+    }, [query])
+    useEffect(() => {
+        const timeoutRef = setTimeout(() => {
+            setQuery(renderedQuery);
+        }, queryDebounceTimeout);
+        return () => {
+            clearTimeout(timeoutRef);
+        };
+    }, [renderedQuery, setQuery])
+
+    const renderOrderStatuses = [
+        {
+            value: 'all',
+            label: 'All',
+            color: null,
+        },
+        ...orderStatuses,
+    ].map((orderStatus) => ({
+        ...orderStatus,
+        label: <Stack direction={'row'} alignItems={'center'} spacing={2}>
+            {orderStatus.color ? <Badge variant={'dot'} color={orderStatus.color} className={`dot ${orderStatus.color}`} /> : null}
+            <Typography>
+                {orderStatus.label}
+            </Typography>
+        </Stack>
+    }));
     return <RootStack direction={'row'} spacing={2}>
         <SearchTextField
-            value={query.search}
+            value={renderedQuery.search}
             placeholder={'Search'}
             label={'Search for order'}
-            onChange={(newSearch) => setQuery({ ...query, search: newSearch })}
+            onChange={(newSearch) => setRenderedQuery({ ...renderedQuery, search: newSearch })}
             icon={SearchIcon}
         />
         <Select
-            value={query.status}
+            value={renderedQuery.status}
             label={'Status'}
-            onChange={(newStatus) => setQuery({ ...query, status: newStatus || '' })}
-            options={orderStatuses}
+            onChange={(newStatus) => setRenderedQuery({ ...renderedQuery, status: newStatus || '' })}
+            options={renderOrderStatuses}
         />
         <CustomerSelect
-            value={query.customerId}
-            onChange={(customerId) => setQuery({ ...query, customerId: customerId || '' })}
+            value={renderedQuery.customerId}
+            onChange={(customerId) => setRenderedQuery({ ...renderedQuery, customerId: customerId || '' })}
             allowAll={true}
         />
     </RootStack>;

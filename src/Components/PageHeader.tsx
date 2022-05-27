@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 import { ReactComponent as DownloadIcon } from "../icons/download.svg";
 import NewOrderDialog from './NewOrderDialog';
-import {borderStyle} from "../Theme";
+import {borderStyle} from "../Theme/constants";
 
 interface PageHeaderProps {
     onSubmitNewOrder: () => void,

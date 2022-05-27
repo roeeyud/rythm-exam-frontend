@@ -11,7 +11,7 @@ import OrderTable from "./OrderTable";
 import useOrders from '../hooks/useOrders';
 
 export default function PageBody() {
-    const [query, setQuery] = useState({ search: '', page: 0, limit: 7, status: 'pending', customerId: '', orderByCol: 'invoiceName', order: 'desc'  });
+    const [query, setQuery] = useState({ search: '', page: 0, limit: 7, status: 'all', customerId: '', orderByCol: 'invoiceName', order: 'desc'  });
     const { orders, refreshOrders } = useOrders(query);
     return <Box mt={4} pl={4} pr={4}>
         <Container maxWidth={'xl'}>
