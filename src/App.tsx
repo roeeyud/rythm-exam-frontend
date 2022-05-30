@@ -7,10 +7,9 @@ import './App.css';
 import PageBody from "./Components/PageBody";
 
 function App() {
-
     return (
         <Theme>
-            <Box sx={{ flexGrow: 1 }}>
+            <Box className={'App'}>
                 <AppBar />
                 <PageBody />
             </Box>

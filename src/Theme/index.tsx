@@ -22,6 +22,7 @@ import MuiTableCell from './MuiTableCell';
 import MuiChip from './MuiChip';
 import MuiTableHead from './MuiTableHead';
 import MuiTableContainer from './MuiTableContainer';
+import MuiContainer from './MuiContainer';
 
 const theme = createTheme({
     palette: {
@@ -50,6 +51,7 @@ const theme = createTheme({
         MuiChip,
         MuiTableHead,
         MuiTableContainer,
+        MuiContainer,
     }
 })
 

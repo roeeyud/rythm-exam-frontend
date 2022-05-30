@@ -64,18 +64,18 @@ export default function QueryBar({ setQuery, query }: QueryBarProps) {
             value={renderedQuery.search}
             placeholder={'Search'}
             label={'Search for order'}
-            onChange={(newSearch) => setRenderedQuery({ ...renderedQuery, search: newSearch })}
+            onChange={(newSearch) => setRenderedQuery({ ...renderedQuery, search: newSearch, page: 0 })}
             icon={SearchIcon}
         />
         <Select
             value={renderedQuery.status}
             label={'Status'}
-            onChange={(newStatus) => setRenderedQuery({ ...renderedQuery, status: newStatus || '' })}
+            onChange={(newStatus) => setRenderedQuery({ ...renderedQuery, status: newStatus || '', page: 0 })}
             options={renderOrderStatuses}
         />
         <CustomerSelect
             value={renderedQuery.customerId}
-            onChange={(customerId) => setRenderedQuery({ ...renderedQuery, customerId: customerId || '' })}
+            onChange={(customerId) => setRenderedQuery({ ...renderedQuery, customerId: customerId || '', page: 0 })}
             allowAll={true}
         />
     </RootStack>;

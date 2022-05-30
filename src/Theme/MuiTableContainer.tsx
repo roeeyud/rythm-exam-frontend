@@ -1,7 +1,8 @@
 export default {
     styleOverrides: {
         root: {
-            overflowX: 'hidden'
+            overflowX: 'hidden',
+            flex: 1,
         }
     }
 } as const;

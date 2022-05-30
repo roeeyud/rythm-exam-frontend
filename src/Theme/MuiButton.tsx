@@ -29,6 +29,18 @@ export default {
                 '&:hover': {
                     background: '#F9F5FF'
                 }
+            },
+            '&.page-button': {
+                minWidth: 40,
+                height: 40,
+                fontWeight: 600,
+                '&:hover': {
+                    background: '#F9F5FF',
+                    color: primaryColor,
+                },
+                '&.MuiButton-textPrimary': {
+                    background: '#F9F5FF',
+                }
             }
         },
         outlinedInherit: {
