@@ -19,11 +19,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
 interface QueryBarProps {
-    query: UseOrderQuery,
     orders: Array<Order> | null | Error,
 }
 
-export default function OrderTable({ orders, query }: QueryBarProps) {
+export default function OrderTable({ orders }: QueryBarProps) {
     if (orders === null) {
         return <div>loading</div>
     }

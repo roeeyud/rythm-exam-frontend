@@ -22,7 +22,7 @@ export default function PageBody() {
                 <NavMenu />
                 <Stack direction={'column'} spacing={4} flex={1} overflow={'auto'} padding={2} >
                     <QueryBar query={query} setQuery={setQuery} />
-                    <OrderTable orders={orders} query={query}/>
+                    <OrderTable orders={orders} />
                     <Pagination query={query} setQuery={setQuery} orders={orders} />
                 </Stack>
             </Stack>
